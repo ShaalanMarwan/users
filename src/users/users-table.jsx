@@ -9,8 +9,21 @@ import {
   TableHead,
   TableBody,
 } from "@mui/material/";
+import Button from "@mui/material/Button";
+import { useEffect, useState } from "react"
+const UsersTable = ({}) => {
+  const [users, setUsers] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+  // fetch("https://jsonplaceholder.typicode.com/users")
+  //   .then((response) => response.json())
+  //   .then((data) => setUsers(data));
 
-const UsersTable = ({users}) => {
+  useEffect(() => {
+    // setUsers([])
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then((data) => setUsers(data));
+  }, [refresh]);
   return (
     <TableContainer component={Paper}>
       <Table>
