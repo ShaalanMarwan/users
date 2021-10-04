@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
-
+import logo from "./logo.svg";
+import "./App.css";
+import { useEffect, useState } from "react";
+import UsersTable from "./users/users-table";
 function App() {
+  const [users, setUsers] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+  // fetch("https://jsonplaceholder.typicode.com/users")
+  //   .then((response) => response.json())
+  //   .then((data) => setUsers(data));
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+    .then((response) => response.json())
+    .then((data) => setUsers(data));
+
+  },[refresh]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <UsersTable users={users} />
     </div>
   );
 }
